@@ -36,6 +36,7 @@ Flutter를 이용하여 보드게임 Ricochet Robot 개발
   </tr>
 </table>
 
+- 게임의 주요 요소는 벽(Wall), 말(Piece), 목표(Target) 3가지이다. 이들의 위치는 게임 시작과 동시에 모두 무작위로 설정되어 GridView Widget에 Stack-by-Stack으로 쌓여서 배치된다. 여기서 벽(Wall)의 경우, 생성할 벽의 개수를 조정함으로써 게임의 난이도를 조절할 수 있다.
 - 저장이 필요한 이미지는 별도의 Database 없이 앱 내부(Local Path)에 저장한다. 하지만 앱 용량의 증가를 제한하기 위해 특정 개수만큼의 이미지만 저장하도록 설정하였다.
 - 복잡하고 효과적인 상태 관리를 위해 Provider를 사용하였다.
 - APK 빌드 및 App Bundle 업로드까지 가능하도록 개발하였다.
