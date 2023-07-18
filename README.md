@@ -64,3 +64,6 @@ Flutter를 이용하여 보드게임 Ricochet Robot 개발
 - intl: ^0.18.0                     // DataFormat을 위해 사용.
 - ntp: ^2.0.0                       // NTP(Network Time Protocol). 네트워크 시간 확인용.
 - page_view_indicators: ^2.0.0      // Loading Indicator.
+- auto_size_text: ^3.0.0
+- flutter_dotenv: ^5.1.0
+- google_mobile_ads: ^3.0.0
