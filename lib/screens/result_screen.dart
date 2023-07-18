@@ -1,7 +1,7 @@
 import 'dart:io';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:ntp/ntp.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:ricochet_robot_v1/utils/globals.dart';
 import 'package:ricochet_robot_v1/screens/init_screen.dart';
@@ -170,8 +170,11 @@ void dialogGameOver(BuildContext context) {
                                             size: 30,
                                             color: Colors.red,
                                           ),
-                                          Text(
+                                          AutoSizeText(
                                             ": $moveCountR",
+                                            maxLines: 1,
+                                            softWrap: true,
+                                            minFontSize: 18,
                                             style: const TextStyle(
                                               fontFamily: 'Atarian',
                                               fontSize: 24,
@@ -187,8 +190,11 @@ void dialogGameOver(BuildContext context) {
                                             size: 30,
                                             color: Colors.blue,
                                           ),
-                                          Text(
+                                          AutoSizeText(
                                             ": $moveCountB",
+                                            maxLines: 1,
+                                            softWrap: true,
+                                            minFontSize: 18,
                                             style: const TextStyle(
                                               fontFamily: 'Atarian',
                                               fontSize: 24,
@@ -210,8 +216,11 @@ void dialogGameOver(BuildContext context) {
                                             size: 30,
                                             color: Colors.green,
                                           ),
-                                          Text(
+                                          AutoSizeText(
                                             ": $moveCountG",
+                                            maxLines: 1,
+                                            softWrap: true,
+                                            minFontSize: 18,
                                             style: const TextStyle(
                                               fontFamily: 'Atarian',
                                               fontSize: 24,
@@ -227,8 +236,11 @@ void dialogGameOver(BuildContext context) {
                                             size: 30,
                                             color: Colors.yellow,
                                           ),
-                                          Text(
+                                          AutoSizeText(
                                             ": $moveCountY",
+                                            maxLines: 1,
+                                            softWrap: true,
+                                            minFontSize: 18,
                                             style: const TextStyle(
                                               fontFamily: 'Atarian',
                                               fontSize: 24,
@@ -249,8 +261,11 @@ void dialogGameOver(BuildContext context) {
                                 children: [
                                   Align(
                                     alignment: Alignment.centerLeft,
-                                    child: Text(
+                                    child: AutoSizeText(
                                       "Movement: $totalMoveCount",
+                                      maxLines: 1,
+                                      softWrap: true,
+                                      minFontSize: 18,
                                       textAlign: TextAlign.start,
                                       style: const TextStyle(
                                         fontFamily: 'Atarian',
@@ -261,8 +276,11 @@ void dialogGameOver(BuildContext context) {
                                   ),
                                   Align(
                                     alignment: Alignment.centerLeft,
-                                    child: Text(
+                                    child: AutoSizeText(
                                       "Game Time: $gameTime s",
+                                      maxLines: 1,
+                                      softWrap: true,
+                                      minFontSize: 18,
                                       textAlign: TextAlign.start,
                                       style: const TextStyle(
                                         fontFamily: 'Atarian',
@@ -305,7 +323,9 @@ void dialogGameOver(BuildContext context) {
                       ),
                     ),
                     OutlinedButton(
-                      onPressed: () => newGame(context),
+                      onPressed: () {
+                        newGame(context);
+                      },
                       style: OutlinedButton.styleFrom(
                         side: const BorderSide(color: Colors.black26, width: 2),
                         shape: const RoundedRectangleBorder(

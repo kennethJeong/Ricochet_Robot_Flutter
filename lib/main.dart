@@ -1,24 +1,26 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:ricochet_robot_v1/utils/globals.dart';
 import 'package:ricochet_robot_v1/screens/init_screen.dart';
-import 'package:ricochet_robot_v1/screens/test_screen.dart';
-
-GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load(fileName: 'assets/config/.env');
+  MobileAds.instance.initialize();
+
   runApp(
     MultiProvider(
       providers: [
         ChangeNotifierProvider<Globals>(create: (_) => Globals()),
       ],
-      child: MaterialApp(
-        navigatorKey: navigatorKey,
+      child: const MaterialApp(
         debugShowCheckedModeBanner: false,
         // home: const MainScreen(),
-        home: const InitScreen(),
+        home: InitScreen(),
         // home: const TestScreen(),
       ),
     ),
@@ -28,6 +30,10 @@ void main() async {
   final directory = (await getApplicationDocumentsDirectory ()).path;
   if(!Directory("$directory/records").existsSync()) {
     Directory("$directory/records").create(recursive: true);
+
+    // isFirst 파일 생성
+    int isFirst = 1;
+    File("$directory/isFirst.txt").writeAsString(isFirst.toString());
   }
 }
 

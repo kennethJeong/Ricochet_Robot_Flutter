@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:ricochet_robot_v1/admob.dart';
 import 'package:ricochet_robot_v1/screens/init_screen.dart';
 import 'package:page_view_indicators/page_view_indicators.dart';
 
@@ -25,6 +26,8 @@ void dialogRecords(BuildContext context) async {
 
   var pageViewController = PageController(viewportFraction: 1);
   var pageViewNotifier = ValueNotifier<int>(0);
+
+  Admob().adLoadInterstitial();
 
   showDialog(
     context: context,
@@ -87,7 +90,14 @@ void dialogRecords(BuildContext context) async {
                 builder: (BuildContext context, AsyncSnapshot snapshot) {
                   // data 를 아직 받아 오지 못했을 때.
                   if (snapshot.hasData == false) {
-                    return const CircularProgressIndicator();
+                    return Container(
+                      height: MediaQuery.of(context).size.height * 0.8,
+                      child: Center(
+                        child: CircularProgressIndicator(
+                          color: Colors.black,
+                        )
+                      ),
+                    );
                   }
                   // error 가 발생하게 될 경우.
                   else if (snapshot.hasError) {

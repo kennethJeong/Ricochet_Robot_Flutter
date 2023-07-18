@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:arrow_pad/arrow_pad.dart';
 import 'package:ricochet_robot_v1/utils/globals.dart';
@@ -207,28 +208,37 @@ class _BottomScreenState extends State<BottomScreen> {
                       alignment: Alignment.topCenter,
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 30),
-                        child: Text(
+                        child: AutoSizeText(
                           countSizedBoxList.toString(),
+                          maxLines: 1,
+                          softWrap: true,
+                          minFontSize: 36,
                           style: const TextStyle(
                             fontFamily: 'DS-DIGIB',
                             fontSize: 50,
-                            color: Colors.black ,
+                            color: Colors.black,
                           ),
-                        )
+                        ),
                       ),
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        Text(
+                        AutoSizeText(
                           '$secondCount',
+                          maxLines: 1,
+                          softWrap: true,
+                          minFontSize: 22,
                           style: const TextStyle(
                             fontSize: 30,
                           ),
                         ),
-                        Text(
+                        AutoSizeText(
                           hundredthCount,
+                          maxLines: 1,
+                          softWrap: true,
+                          minFontSize: 8,
                           style: const TextStyle(
                             fontSize: 12,
                           ),
@@ -246,6 +256,7 @@ class _BottomScreenState extends State<BottomScreen> {
                     heightFactor: 1.0,
                     child: ArrowPad(
                       outerColor: arrowColor,
+                      innerColor: arrowColor,
                       onPressedUp: () => addContainer('up'),
                       onPressedLeft: () => addContainer('left'),
                       onPressedRight: () => addContainer('right'),

@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:ricochet_robot_v1/screens/bottom_screen.dart';
 import 'dart:math';
-import 'dart:typed_data';
-import 'package:screenshot/screenshot.dart';
 import 'package:provider/provider.dart';
-import 'package:ricochet_robot_v1/screens/result_screen.dart';
 import 'package:ricochet_robot_v1/utils/globals.dart';
 
 class TestScreen extends StatefulWidget {

@@ -1,5 +1,8 @@
 import 'dart:async';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:ricochet_robot_v1/admob.dart';
 import 'package:ricochet_robot_v1/screens/main_screen.dart';
 import 'package:ricochet_robot_v1/screens/records_screen.dart';
 
@@ -19,6 +22,8 @@ class _InitScreenState extends State<InitScreen> {
   List<int> routesRed = [5, 7, 3, 2, 14, 15, 11, 8, 0, 1, 5];  // red piece 의 이동 경로
   List<int> routesBlue = [11, 8, 0, 1, 5, 7, 3, 2, 14, 15, 11];  // blue piece 의 이동 경로
   bool stateAutoPlay = true;
+
+  BannerAd? bannerAD;
 
   // Walls
   Map<int, String> wallPositions = {1: 'right', 5: 'bottom', 11: 'top', 14: 'left'};
@@ -96,12 +101,15 @@ class _InitScreenState extends State<InitScreen> {
 
     autoPlayingPieces(routesRed);
     autoPlayingPieces(routesBlue);
+
+    bannerAD = Admob().adLoadBanner();
   }
 
-  // @override
-  // void dispose() {
-  //   super.dispose();
-  // }
+  @override
+  void dispose() {
+    super.dispose();
+    bannerAD?.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -114,8 +122,12 @@ class _InitScreenState extends State<InitScreen> {
           Container(
             alignment: Alignment.bottomCenter,
             height: 180,
-            child: const Text(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: const AutoSizeText(
               'Ricochet Robot',
+              maxLines: 1,
+              softWrap: true,
+              minFontSize: 54,
               style: TextStyle(
                 color: Colors.black,
                 fontSize: 60,
@@ -171,15 +183,18 @@ class _InitScreenState extends State<InitScreen> {
                       style: OutlinedButton.styleFrom(
                         side: const BorderSide(color: Colors.black26, width: 2),
                         shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(15))
+                          borderRadius: BorderRadius.all(Radius.circular(15))
                         )
                       ),
                       onPressed: () {
                         setState(() => stateAutoPlay = false);  // auto playing -> dispose.
                         Navigator.push(context, MaterialPageRoute(builder: (context) => const MainScreen())); // main_screen 으로 이동.
                       },
-                      child: const Text(
+                      child: const AutoSizeText(
                         'New Game',
+                        maxLines: 1,
+                        softWrap: true,
+                        minFontSize: 34,
                         style: TextStyle(
                           fontFamily: 'Atarian',
                           fontSize: 40,
@@ -206,8 +221,11 @@ class _InitScreenState extends State<InitScreen> {
                         setState(() => stateAutoPlay = false);  // auto playing -> dispose.
                         dialogRecords(context);
                       },
-                      child: const Text(
+                      child: const AutoSizeText(
                         'Records',
+                        maxLines: 1,
+                        softWrap: true,
+                        minFontSize: 34,
                         style: TextStyle(
                           fontFamily: 'Atarian',
                           fontSize: 40,
@@ -220,7 +238,12 @@ class _InitScreenState extends State<InitScreen> {
                 ],
               )
             )
-          )
+          ),
+          SizedBox(
+            width: MediaQuery.of(context).size.width,
+            height: 60,
+            child: AdWidget(ad: bannerAD!),
+          ),
         ],
       ),
     );

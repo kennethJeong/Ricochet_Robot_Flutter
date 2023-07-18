@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ricochet_robot_v1/admob.dart';
 import 'package:ricochet_robot_v1/screens/bottom_screen.dart';
 import 'dart:math';
 import 'dart:typed_data';
@@ -334,7 +335,6 @@ class _TopScreenState extends State<TopScreen> {
     final globalListPiece = Globals().listPieceState;
     bool gameOverState = false;
 
-
     Map<int, String> mapColorValueWithString = {
       4294198070 : 'red',
       4280391411 : 'blue',
@@ -536,7 +536,12 @@ class _TopScreenState extends State<TopScreen> {
           // piece 가 target 에 도착 했을 때 == 게임 오버
           if(gameOverState == true) {
             const BottomScreen().endTimer();
-            dialogGameOver(context);
+
+            Admob().adLoadInterstitial();
+
+            Future.delayed(const Duration(seconds: 1), () {
+              dialogGameOver(context);
+            });
           }
           break;
         }
